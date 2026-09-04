@@ -207,11 +207,12 @@ img{max-width:100%;display:block}
 
 /* ---------- HERO (full-bleed cover) ---------- */
 .hero{
-  position:relative;min-height:100vh;
+  position:relative;min-height:100vh;min-height:100svh;
   display:flex;align-items:flex-end;
   padding:113px 24px 68px;
   overflow:hidden;
 }
+@media (max-width:600px){ .hero{padding:100px 18px 56px} }
 .hero-bg{position:absolute;inset:0;z-index:0}
 .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;transform:scale(1.08);
   filter:brightness(.6) contrast(1.02) saturate(1.05);will-change:transform}
@@ -545,7 +546,7 @@ p.lead{
   transition:transform .7s cubic-bezier(.2,.7,.2,1);
   transform-style:preserve-3d;
 }
-.card:hover .card-inner{transform:rotateY(180deg)}
+.card:hover .card-inner,.card.flipped .card-inner{transform:rotateY(180deg)}
 .card-face{
   position:absolute;inset:0;
   backface-visibility:hidden;
@@ -1037,7 +1038,7 @@ p.lead{
 <section class="empower-sec">
   <div class="container empower-grid">
     <div class="empower-img reveal">
-      <img src="images/model-empower.webp" alt="Empowering people, improving lives">
+      <img loading="lazy" src="images/model-empower.webp" alt="Empowering people, improving lives">
     </div>
     <div class="empower-text reveal">
       <h2>Empowering people. <span class="grad">Improving lives.</span></h2>
@@ -1059,9 +1060,9 @@ p.lead{
       </div>
       <div class="about-visual gallery reveal">
         <div class="about-gallery">
-          <figure><img src="images/model-book.png" alt="Educate"></figure>
-          <figure><img src="images/model-seller.png" alt="Sustain"></figure>
-          <figure><img src="images/model-tailor.png" alt="Skill"></figure>
+          <figure><img loading="lazy" src="images/model-book.png" alt="Educate"></figure>
+          <figure><img loading="lazy" src="images/model-seller.png" alt="Sustain"></figure>
+          <figure><img loading="lazy" src="images/model-tailor.png" alt="Skill"></figure>
         </div>
       </div>
     </div>
@@ -1072,7 +1073,7 @@ p.lead{
 <section class="empower-sec">
   <div class="container empower-grid">
     <div class="empower-img reveal">
-      <img src="images/reach.png" alt="Community gathered under a tree">
+      <img loading="lazy" src="images/reach.png" alt="Community gathered under a tree">
     </div>
     <div class="empower-text reveal">
       <h2>Our impact <span class="grad">reaches out to everyone.</span></h2>
@@ -1093,13 +1094,13 @@ p.lead{
   <div class="container video-grid">
     <div class="video-card">
       <div class="video-embed" id="kalikeVideo1" onclick="playKalikeVideo('kalikeVideo1','oB-VPPDQp5I')">
-        <img src="images/Screenshot 2026-09-04 152145.png" alt="Kalike: Empowering people, Improving lives — watch on YouTube">
+        <img loading="lazy" src="images/Screenshot 2026-09-04 152145.png" alt="Kalike: Empowering people, Improving lives — watch on YouTube">
         <button class="video-play" aria-label="Play video">▶</button>
       </div>
     </div>
     <div class="video-card">
       <div class="video-embed" id="kalikeVideo2" onclick="playKalikeVideo('kalikeVideo2','cOaSCDpxZUo')">
-        <img src="images/Screenshot 2026-09-04 163613.png" alt="Alternate Wetting and Drying (AWD) — watch on YouTube">
+        <img loading="lazy" src="images/Screenshot 2026-09-04 163613.png" alt="Alternate Wetting and Drying (AWD) — watch on YouTube">
         <button class="video-play" aria-label="Play video">▶</button>
       </div>
     </div>
@@ -1114,7 +1115,7 @@ function playKalikeVideo(id, videoId){
 
 <!-- ============ IMPACT ============ -->
 <section class="impact">
-  <img class="reach-float" src="images/reach.png" alt="" aria-hidden="true">
+  <img class="reach-float" loading="lazy" src="images/reach.png" alt="" aria-hidden="true">
   <div class="container">
     <div class="statband reveal" aria-label="Impact highlights">
       <div class="statband-track">
@@ -1152,7 +1153,7 @@ function playKalikeVideo(id, videoId){
       <article class="card reveal-3d">
         <div class="card-inner">
           <div class="card-face card-front">
-            <div class="card-img"><img src="images/program-1-early-childhood.png" alt="" /></div>
+            <div class="card-img"><img loading="lazy" src="images/program-1-early-childhood.png" alt="" /></div>
             <div class="card-content">
               <span class="card-tag">ECD</span>
               <h3>Early Childhood Education</h3>
@@ -1173,7 +1174,7 @@ function playKalikeVideo(id, videoId){
       <article class="card reveal-3d">
         <div class="card-inner">
           <div class="card-face card-front">
-            <div class="card-img"><img src="images/program-2-education.png" alt="" /></div>
+            <div class="card-img"><img loading="lazy" src="images/program-2-education.png" alt="" /></div>
             <div class="card-content">
               <span class="card-tag">Edu</span>
               <h3>Education</h3>
@@ -1194,7 +1195,7 @@ function playKalikeVideo(id, videoId){
       <article class="card reveal-3d">
         <div class="card-inner">
           <div class="card-face card-front">
-            <div class="card-img"><img src="images/program-3-livelihood.png" alt="" /></div>
+            <div class="card-img"><img loading="lazy" src="images/program-3-livelihood.png" alt="" /></div>
             <div class="card-content">
               <span class="card-tag">Livelihood</span>
               <h3>Livelihood</h3>
@@ -1215,7 +1216,7 @@ function playKalikeVideo(id, videoId){
       <article class="card reveal-3d">
         <div class="card-inner">
           <div class="card-face card-front">
-            <div class="card-img"><img src="images/program-6-wash.png" alt="WASH" /></div>
+            <div class="card-img"><img loading="lazy" src="images/program-6-wash.png" alt="WASH" /></div>
             <div class="card-content">
               <span class="card-tag">WASH</span>
               <h3>WASH</h3>
@@ -1236,7 +1237,7 @@ function playKalikeVideo(id, videoId){
       <article class="card reveal-3d">
         <div class="card-inner">
           <div class="card-face card-front">
-            <div class="card-img"><img src="images/program-4-skill-development.png" alt="Skill development" /></div>
+            <div class="card-img"><img loading="lazy" src="images/program-4-skill-development.png" alt="Skill development" /></div>
             <div class="card-content">
               <span class="card-tag">Skill</span>
               <h3>Skill development</h3>
@@ -1257,7 +1258,7 @@ function playKalikeVideo(id, videoId){
       <article class="card reveal-3d">
         <div class="card-inner">
           <div class="card-face card-front">
-            <div class="card-img"><img src="images/program-5-community-radio.jpg" alt="CRS – Community Radio station" /></div>
+            <div class="card-img"><img loading="lazy" src="images/program-5-community-radio.jpg" alt="CRS – Community Radio station" /></div>
             <div class="card-content">
               <span class="card-tag">CRS</span>
               <h3>CRS – Radio station</h3>
@@ -1278,7 +1279,7 @@ function playKalikeVideo(id, videoId){
       <article class="card reveal-3d">
         <div class="card-inner">
           <div class="card-face card-front">
-            <div class="card-img"><img src="images/program-7-lambani-women.jpg" alt="Lambani women entrepreneurs" /></div>
+            <div class="card-img"><img loading="lazy" src="images/program-7-lambani-women.jpg" alt="Lambani women entrepreneurs" /></div>
             <div class="card-content">
               <span class="card-tag">Women</span>
               <h3>Lambani women entrepreneurs</h3>
@@ -1299,7 +1300,7 @@ function playKalikeVideo(id, videoId){
       <article class="card reveal-3d">
         <div class="card-inner">
           <div class="card-face card-front">
-            <div class="card-img"><img src="images/program-8-elderly-care.jpg" alt="Elderly Care" /></div>
+            <div class="card-img"><img loading="lazy" src="images/program-8-elderly-care.jpg" alt="Elderly Care" /></div>
             <div class="card-content">
               <span class="card-tag">Elderly</span>
               <h3>Elderly Care</h3>
@@ -1320,7 +1321,7 @@ function playKalikeVideo(id, videoId){
       <article class="card reveal-3d">
         <div class="card-inner">
           <div class="card-face card-front">
-            <div class="card-img"><img src="images/program-9-girl-child.jpg" alt="Empowering the Girl Child" /></div>
+            <div class="card-img"><img loading="lazy" src="images/program-9-girl-child.jpg" alt="Empowering the Girl Child" /></div>
             <div class="card-content">
               <span class="card-tag">Girl Child</span>
               <h3>Empowering the Girl Child</h3>
@@ -1378,7 +1379,7 @@ function playKalikeVideo(id, videoId){
 <!-- ============ PILLARS ============ -->
 <section class="pillars-banner">
   <div class="pillars-bg">
-    <img src="images/pillars.webp" alt="Pillars of strength" />
+    <img loading="lazy" src="images/pillars.webp" alt="Pillars of strength" />
   </div>
   <div class="pillars-overlay reveal-3d">
     <span class="sec-eyebrow">Pillars of strength</span>
@@ -1578,6 +1579,17 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     });
     btn.addEventListener('mouseleave', ()=>{
       btn.style.transform = '';
+    });
+  });
+})();
+
+/* ================== Tap-to-flip cards on touch devices ================== */
+(function(){
+  if (!window.matchMedia('(hover: none)').matches) return;
+  document.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('click', e=>{
+      if (e.target.closest('.card-link')) return;
+      card.classList.toggle('flipped');
     });
   });
 })();
