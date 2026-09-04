@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kalike — Creating sustainability across generations</title>
+<link rel="preconnect" href="https://i0.wp.com" />
+<link rel="preconnect" href="https://kalike.org" />
+<link rel="icon" href="images/logo.png" />
+<link rel="apple-touch-icon" href="images/logo.png" />
+
+<!-- Google fonts for refined professional look -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   KALIKE — REFINED PROFESSIONAL 3D REDESIGN
+   Sophisticated navy + warm gold + sage palette
+   ========================================================= */
+
+:root{
+  /* Brand navy from kalike.org — used for accent blocks (CTA, footer, card backs) */
+  --navy:        #071645;
+  --navy-2:      #0c2059;
+  --navy-soft:   #16265f;
+  --navy-light:  #24407a;
+
+  /* Brand gold from kalike.org */
+  --gold:        #e9c807;   /* primary brand accent */
+  --gold-soft:   #f4da3f;
+  --gold-deep:   #a88a06;   /* darker gold that reads as text on white */
+  --sage:        #6f9184;   /* muted secondary */
+  --sage-soft:   #8faba0;
+
+  /* Light canvas */
+  --paper:       #ffffff;
+  --paper-2:     #f6f5f1;   /* warm off-white section band */
+  --card:        #f3f1ec;
+  --ink:         #071645;   /* navy text */
+  --ink-soft:    #55627a;   /* muted body text on white */
+  --line:        rgba(7,22,69,.10);
+  --line-strong: rgba(7,22,69,.16);
+  --shadow:      0 14px 40px rgba(7,22,69,.08);
+  --shadow-lg:   0 28px 70px rgba(7,22,69,.14);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  cursor:none;
+}
+@media (max-width:900px){ body{cursor:auto} }
+
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ---------- Custom cursor ---------- */
+.cursor-dot,.cursor-ring{
+  position:fixed;top:0;left:0;
+  pointer-events:none;z-index:9999;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+}
+.cursor-dot{
+  width:10px;height:10px;background:var(--gold);
+  transition:transform .12s ease;
+}
+.cursor-ring{
+  width:38px;height:38px;
+  border:1.5px solid rgba(204, 173, 0, 0.7);
+  transition:width .5s ease,height .5s ease,background .5s ease,border .5s ease;
+}
+.cursor-ring.hover{
+  width:56px;height:56px;
+  background:rgba(7,22,69,.10);
+  border-color:rgba(7,22,69,.55);
+}
+@media (max-width:900px){ .cursor-dot,.cursor-ring{display:none} }
+
+/* ---------- Background subtle gradient mesh ---------- */
+.bg-mesh{
+  position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(70% 60% at 15% 12%, rgba(233,200,7,.10), transparent 60%),
+    radial-gradient(60% 50% at 85% 12%, rgba(111,145,132,.08), transparent 60%),
+    radial-gradient(70% 70% at 80% 88%, rgba(233,200,7,.07), transparent 60%),
+    radial-gradient(55% 60% at 12% 85%, rgba(111,145,132,.06), transparent 60%),
+    linear-gradient(180deg,#ffffff 0%, #f6f5f1 50%, #ffffff 100%);
+  background-size:200% 200%;
+  animation:meshShift 30s ease-in-out infinite;
+}
+@keyframes meshShift{
+  0%,100%{background-position:0% 0%,100% 0%,100% 100%,0% 100%,0 0}
+  50%{background-position:30% 40%,70% 30%,60% 70%,30% 60%,0 50%}
+}
+.bg-noise{
+  position:fixed;inset:0;z-index:-1;opacity:.02;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Floating orbs (subtle) ---------- */
+.orbs{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.orb{
+  position:absolute;border-radius:50%;
+  filter:blur(75px);opacity:.14;
+  animation:floatOrb linear infinite;
+}
+.orb.o1{width:340px;height:340px;background:var(--gold);top:-100px;left:-100px;animation-duration:32s}
+.orb.o2{width:420px;height:420px;background:var(--sage);top:30%;right:-140px;animation-duration:38s}
+.orb.o3{width:280px;height:280px;background:var(--gold-deep);bottom:5%;left:10%;animation-duration:28s}
+.orb.o4{width:360px;height:360px;background:var(--sage-soft);bottom:-120px;right:25%;animation-duration:34s}
+@keyframes floatOrb{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(40px,-30px) scale(1.06)}
+  66%{transform:translate(-30px,40px) scale(.95)}
+}
+
+/* ---------- Navbar ---------- */
+.nav{
+  position:fixed;top:18px;left:50%;
+  transform:translateX(-50%);
+  width:min(1240px, calc(100% - 32px));
+  z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(20px) saturate(140%);
+  -webkit-backdrop-filter:blur(20px) saturate(140%);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 12px 40px rgba(7,22,69,.10);
+  transition:transform .4s ease, background .4s ease, box-shadow .4s ease;
+}
+.nav.scrolled{
+  transform:translateX(-50%) translateY(-6px);
+  background:rgba(255,255,255,.95);
+  box-shadow:0 16px 44px rgba(7,22,69,.14);
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Fraunces',serif;
+  font-weight:600;font-size:1.3rem;letter-spacing:.3px;
+  color:var(--ink);
+}
+.nav-logo img{width:68px;height:68px;object-fit:contain}
+
+.nav-menu{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-menu>li{position:relative}
+.nav-menu>li>a{
+  display:block;padding:10px 14px;border-radius:10px;
+  font-size:.82rem;font-weight:600;letter-spacing:.4px;
+  color:var(--ink-soft);
+  transition:color .25s,background .25s;
+}
+.nav-menu>li>a:hover{color:var(--ink);background:rgba(7,22,69,.05)}
+.nav-menu .has-sub>a::after{
+  content:'▾';margin-left:6px;font-size:.7rem;opacity:.6;
+  display:inline-block;
+  transition:transform .25s;
+}
+.nav-menu .has-sub:hover>a::after{transform:rotate(180deg)}
+
+.submenu{
+  position:absolute;top:calc(100% + 8px);left:0;
+  min-width:240px;
+  background:rgba(255,255,255,.98);
+  backdrop-filter:blur(20px);
+  border:1px solid var(--line);
+  border-radius:12px;padding:6px;
+  list-style:none;
+  opacity:0;visibility:hidden;
+  transform:translateY(-8px) rotateX(-12deg);
+  transform-origin:top center;
+  transition:opacity .25s, transform .25s, visibility .25s;
+  box-shadow:0 22px 60px rgba(7,22,69,.16);
+}
+.has-sub:hover .submenu{opacity:1;visibility:visible;transform:translateY(0) rotateX(0)}
+.submenu li a{
+  display:block;padding:9px 12px;border-radius:8px;
+  font-size:.82rem;color:var(--ink-soft);
+  transition:background .2s,color .2s,padding .2s;
+}
+.submenu li a:hover{background:rgba(233,200,7,.14);color:var(--gold-deep);padding-left:16px}
+
+.nav-cta{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:999px;
+  background:var(--gold);
+  color:var(--navy);
+  font-weight:600;font-size:.82rem;letter-spacing:.3px;
+  box-shadow:0 10px 26px rgba(233,200,7,.25);
+  transition:transform .25s, box-shadow .25s, background .25s;
+}
+.nav-cta:hover{transform:translateY(-2px) scale(1.03);background:var(--gold-soft);box-shadow:0 16px 36px rgba(233,200,7,.4)}
+
+.nav-burger{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer}
+.nav-burger span{width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .3s,opacity .3s}
+@media (max-width:980px){
+  .nav-menu,.nav-cta{display:none}
+  .nav-burger{display:flex}
+}
+
+/* ---------- HERO (full-bleed cover) ---------- */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:flex-end;
+  padding:113px 24px 68px;
+  overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;transform:scale(1.08);
+  filter:brightness(.6) contrast(1.02) saturate(1.05);will-change:transform}
+/* soft scrim: dims the photo and puts a subtle highlight behind the headline */
+.hero::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 22% 78%, rgba(7,22,69,.10), transparent 60%),
+    linear-gradient(180deg, rgba(7,22,69,.30) 0%, rgba(7,22,69,.42) 100%);
+}
+.hero-inner{
+  position:relative;z-index:2;
+  width:min(1240px,100%);margin:0 auto;
+}
+.hero-text{position:relative;z-index:2;max-width:720px}
+
+/* light text over the cover photo — no overlay, legibility from text-shadow */
+.hero .hero-h1{color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.4)}
+.hero .hero-h1 .line2{color:var(--gold-soft)}
+.hero .hero-sub{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+.hero .hero-sub strong{color:#fff}
+.hero .hero-eyebrow{background:rgba(7,22,69,.55);border-color:rgba(255,255,255,.35);color:#fff;backdrop-filter:blur(4px)}
+.hero .scroll-cue{color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.hero .scroll-cue .mouse{border-color:rgba(255,255,255,.7)}
+.hero .scroll-cue .mouse::before{background:var(--gold-soft)}
+.btn.hero-ghost{border-color:rgba(255,255,255,.7);color:#fff;background:rgba(7,22,69,.25);backdrop-filter:blur(4px)}
+.btn.hero-ghost:hover{background:rgba(255,255,255,.18);border-color:#fff}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:999px;
+  background:rgba(233,200,7,.12);
+  border:1px solid rgba(233,200,7,.4);
+  font-size:.74rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold-deep);font-weight:600;
+  margin-bottom:26px;
+  transform:translateY(20px);opacity:0;
+  animation:rise .9s .15s forwards cubic-bezier(.2,.7,.2,1);
+}
+.hero-eyebrow .pip{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 12px rgba(233,200,7,.6);
+}
+
+/* 3D animated headline */
+.hero-h1{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:clamp(2.4rem, 5.4vw, 4.4rem);
+  line-height:1.05;letter-spacing:-1px;
+  margin-bottom:24px;
+  transform-style:preserve-3d;
+  color:var(--ink);
+}
+.hero-h1 .word{
+  display:inline-block;
+  transform-style:preserve-3d;
+  margin-right:.18em;
+}
+.hero-h1 .ch{
+  display:inline-block;
+  transform-style:preserve-3d;
+  opacity:0;
+  transform:translateY(40px) rotateX(-90deg);
+  animation:chIn .85s forwards cubic-bezier(.2,.8,.2,1);
+}
+.hero-h1 .line2{
+  color:var(--gold-deep);
+  font-style:italic;
+  font-weight:500;
+}
+@keyframes chIn{to{opacity:1;transform:translateY(0) rotateX(0)}}
+
+.hero-sub{
+  font-size:1.08rem;line-height:1.65;
+  color:var(--ink-soft);
+  max-width:540px;margin-bottom:34px;
+  opacity:0;transform:translateY(20px);
+  animation:rise .9s 1.2s forwards cubic-bezier(.2,.7,.2,1);
+}
+.hero-sub strong{color:var(--ink);font-weight:700}
+
+.hero-cta{
+  display:flex;flex-wrap:wrap;gap:14px;
+  opacity:0;transform:translateY(20px);
+  animation:rise .9s 1.45s forwards cubic-bezier(.2,.7,.2,1);
+}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:13px 26px;border-radius:10px;
+  font-weight:500;font-size:.9rem;letter-spacing:.3px;
+  transition:transform .25s, box-shadow .25s, background .25s, border-color .25s;
+}
+.btn-primary{
+  background:var(--gold);
+  color:var(--navy);
+  border:1px solid var(--gold);
+  box-shadow:0 10px 28px rgba(233,200,7,.22);
+}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);background:var(--gold-soft);box-shadow:0 16px 40px rgba(233,200,7,.35)}
+.btn-ghost{
+  background:transparent;
+  border:1px solid var(--line-strong);
+  color:var(--ink);
+}
+.btn-ghost:hover{background:rgba(7,22,69,.04);border-color:var(--navy);transform:translateY(-3px)}
+.btn .arrow{
+  display:inline-block;transition:transform .25s;
+}
+.btn:hover .arrow{transform:translateX(4px)}
+
+@keyframes rise{to{opacity:1;transform:translateY(0)}}
+
+/* Hero image with 3D parallax tilt */
+.hero-visual{
+  position:relative;
+  transform-style:preserve-3d;
+  perspective:1200px;
+}
+.hero-visual-wrap{
+  position:relative;
+  border-radius:18px;
+  overflow:hidden;
+  transform-style:preserve-3d;
+  transition:transform .15s ease-out;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.5),
+    0 0 0 1px rgba(255,255,255,.06) inset;
+}
+.hero-visual-wrap img{
+  width:100%;aspect-ratio:16/10;object-fit:cover;
+  display:block;
+}
+.hero-visual-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 50%,rgba(7,22,69,.5));
+  pointer-events:none;
+}
+.hero-float-card{
+  position:absolute;
+  padding:14px 18px;border-radius:12px;
+  background:rgba(7,22,69,.78);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.1);
+  font-size:.82rem;
+  box-shadow:0 14px 40px rgba(0,0,0,.4);
+  animation:floaty 4.5s ease-in-out infinite;
+}
+.hero-float-card .num{
+  font-family:'Fraunces',serif;
+  font-size:1.7rem;font-weight:600;
+  color:var(--gold);
+  letter-spacing:-.5px;
+}
+.hero-float-card .lbl{color:rgba(247,244,239,.6);font-size:.7rem;letter-spacing:.5px;text-transform:uppercase}
+.hero-float-card.fc1{top:8%;right:2%;animation-delay:.2s}
+.hero-float-card.fc2{bottom:14%;right:12%;animation-delay:1.4s}
+@media (max-width:980px){ .hero-float-card{display:none} }
+@keyframes floaty{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-14px)}
+}
+
+.scroll-cue{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:var(--ink-soft);font-size:.68rem;letter-spacing:2px;text-transform:uppercase;
+  animation:fadeCue 2s 2s forwards;
+  opacity:0;
+}
+.scroll-cue .mouse{
+  width:22px;height:36px;border:1.5px solid rgba(7,22,69,.3);border-radius:14px;
+  position:relative;
+}
+.scroll-cue .mouse::before{
+  content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);
+  width:2px;height:7px;background:var(--gold);border-radius:2px;
+  animation:scrollDot 1.8s ease-in-out infinite;
+}
+@keyframes scrollDot{0%{top:6px;opacity:1}80%{top:18px;opacity:0}100%{opacity:0}}
+@keyframes fadeCue{to{opacity:1}}
+
+/* ---------- Section base ---------- */
+section{position:relative;padding:83px 24px}
+.container{width:min(1240px,100%);margin:0 auto}
+.sec-eyebrow{
+  display:inline-block;
+  font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold-deep);font-weight:600;
+  padding:6px 14px;border-radius:999px;
+  background:rgba(233,200,7,.12);
+  border:1px solid rgba(233,200,7,.35);
+  margin-bottom:18px;
+}
+.sec-title{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:clamp(1.9rem, 3.6vw, 3rem);
+  line-height:1.1;letter-spacing:-.5px;
+  margin-bottom:18px;
+  color:var(--ink);
+}
+
+/* ---------- About / intro section ---------- */
+.about{padding-top:60px}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+}
+@media (max-width:980px){ .about-grid{grid-template-columns:1fr;gap:40px} }
+.about-left h2{
+  font-family:'Fraunces',serif;
+  font-weight:600;font-size:clamp(2rem,4vw,3.2rem);
+  line-height:1.08;letter-spacing:-.5px;margin-bottom:20px;
+  color:var(--ink);
+}
+.grad{
+  color:var(--gold-deep);
+  font-style:italic;
+}
+.about-left p{
+  font-size:1.05rem;line-height:1.75;color:var(--ink-soft);
+  margin-bottom:18px;
+}
+p.lead{
+  font-size:1.18rem;color:var(--ink);font-weight:600;
+}
+.about-visual{
+  position:relative;
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+  transform:perspective(1200px) rotateY(-8deg) rotateX(4deg);
+  transition:transform .5s ease;
+}
+.about-visual:hover{transform:perspective(1200px) rotateY(0) rotateX(0)}
+.about-visual img{width:100%;aspect-ratio:4/3;object-fit:cover}
+
+/* ---------- Impact stats (3D cards) ---------- */
+.impact{
+  background:var(--paper);
+}
+.impact-head{text-align:center;max-width:780px;margin:0 auto 60px}
+.impact-head .sec-title{margin-bottom:14px}
+.impact-head p{color:var(--ink-soft);font-size:1.05rem;line-height:1.7}
+
+.impact-slider{
+  position:relative;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+}
+@media (max-width:880px){ .impact-slider{grid-template-columns:1fr} }
+.impact-card{
+  position:relative;
+  padding:36px 28px;
+  border-radius:14px;
+  background:var(--card);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  transform-style:preserve-3d;
+  transition:transform .5s ease, box-shadow .5s ease, border-color .5s ease;
+  overflow:hidden;
+}
+.impact-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--gold);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .5s ease;
+}
+.impact-card:hover::before{transform:scaleX(1)}
+.impact-card:hover{
+  transform:translateY(-8px) rotateX(3deg) rotateY(-3deg);
+  box-shadow:var(--shadow-lg);
+  border-color:rgba(233,200,7,.5);
+}
+.impact-card .ic-num{
+  font-family:'Fraunces',serif;
+  font-size:3rem;font-weight:600;
+  color:var(--gold-deep);
+  line-height:1;margin-bottom:14px;
+  letter-spacing:-1px;
+}
+.impact-card .ic-lbl{
+  font-weight:600;font-size:1.05rem;margin-bottom:8px;
+  color:var(--ink);
+}
+.impact-card .ic-desc{
+  font-size:.92rem;color:var(--ink-soft);line-height:1.6;
+}
+.impact-card .ic-idx{
+  position:absolute;top:18px;right:22px;
+  font-family:'Fraunces',serif;
+  font-size:.85rem;color:rgba(7,22,69,.28);
+  font-style:italic;
+}
+
+/* ---------- Interventions grid ---------- */
+.interventions-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:50px;flex-wrap:wrap;gap:20px;
+}
+.interventions-head .left{max-width:620px}
+.interventions-head .right{
+  font-size:.88rem;color:var(--ink-soft);
+  font-style:italic;
+}
+
+.cards-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+}
+@media (max-width:980px){ .cards-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:680px){ .cards-grid{grid-template-columns:1fr} }
+
+.card{
+  position:relative;
+  border-radius:14px;
+  overflow:hidden;
+  min-height:285px;
+  background:var(--card);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  transform-style:preserve-3d;
+  perspective:1000px;
+  transition:transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s, border-color .5s;
+  cursor:none;
+}
+@media (max-width:900px){ .card{cursor:pointer} }
+.card:hover{
+  border-color:rgba(233,200,7,.45);
+  box-shadow:var(--shadow-lg);
+}
+.card-inner{
+  position:relative;height:100%;
+  transition:transform .7s cubic-bezier(.2,.7,.2,1);
+  transform-style:preserve-3d;
+}
+.card:hover .card-inner{transform:rotateY(180deg)}
+.card-face{
+  position:absolute;inset:0;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  border-radius:14px;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.card-front .card-img{
+  position:relative;flex:1;overflow:hidden;
+}
+.card-front .card-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 1.5s ease;
+}
+.card:hover .card-front .card-img img{transform:scale(1.08)}
+.card-front .card-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg, transparent 30%, rgba(7,22,69,.92) 100%);
+}
+.card-front .card-content{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:22px;z-index:2;
+}
+.card-front .card-tag{
+  display:inline-block;
+  padding:5px 12px;border-radius:6px;
+  background:rgba(233,200,7,.15);
+  border:1px solid rgba(233,200,7,.35);
+  color:var(--gold-soft);
+  font-size:.68rem;letter-spacing:2px;text-transform:uppercase;
+  font-weight:600;margin-bottom:12px;
+}
+.card-front h3{
+  font-family:'Fraunces',serif;
+  font-weight:600;font-size:1.4rem;line-height:1.2;
+  color:#f7f4ef;
+}
+.card-front .flip-hint{
+  position:absolute;top:18px;right:18px;
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(7,22,69,.6);
+  border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(8px);
+  font-size:.85rem;color:rgba(247,244,239,.7);
+  z-index:3;
+}
+.card-back{
+  transform:rotateY(180deg);
+  background:linear-gradient(155deg, var(--navy-soft), var(--navy-2));
+  padding:30px 26px;
+  justify-content:space-between;
+  border:1px solid rgba(233,200,7,.2);
+}
+.card-back::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--gold);
+}
+.card-back h3{
+  font-family:'Fraunces',serif;
+  font-weight:600;font-size:1.5rem;margin-bottom:14px;
+  position:relative;z-index:1;color:#f7f4ef;
+}
+.card-back p{
+  color:rgba(247,244,239,.78);font-size:.95rem;line-height:1.65;
+  position:relative;z-index:1;margin-bottom:20px;
+}
+.card-back .card-link{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:8px;
+  background:var(--gold);
+  color:var(--navy);
+  font-weight:600;font-size:.86rem;
+  position:relative;z-index:1;
+  transition:background .25s,padding .25s;
+}
+.card-back .card-link:hover{background:var(--gold-soft);padding-right:24px}
+
+/* ---------- Pillars section (full-bleed image, text overlaid) ---------- */
+.pillars-banner{
+  position:relative;min-height:70vh;
+  display:flex;align-items:flex-end;
+  padding:60px 24px;overflow:hidden;
+}
+.pillars-bg{position:absolute;inset:0;z-index:0}
+.pillars-bg img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.pillars-banner::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg, rgba(7,22,69,.15) 0%, rgba(7,22,69,.6) 100%);
+}
+.pillars-overlay{position:relative;z-index:2;max-width:720px;width:min(1240px,100%);margin:0 auto}
+.pillars-overlay .sec-title{margin-bottom:18px;color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.4)}
+.pillars-overlay p{
+  font-size:1.05rem;line-height:1.75;color:#fff;margin-bottom:24px;text-shadow:0 1px 10px rgba(0,0,0,.6);
+}
+.pillars-overlay .sec-eyebrow{background:rgba(7,22,69,.55);border-color:rgba(255,255,255,.35);color:#fff;backdrop-filter:blur(4px)}
+.pillars-overlay .btn-primary{background:var(--gold)}
+
+.pillars-badges{
+  display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;
+}
+.pillars-badge{
+  padding:7px 14px;border-radius:6px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.35);
+  font-size:.78rem;color:#fff;
+  letter-spacing:.3px;backdrop-filter:blur(4px);
+}
+@media (max-width:900px){ .pillars-banner{min-height:0;padding:45px 20px} }
+
+/* ---------- Footer ---------- */
+.footer{
+  padding:60px clamp(24px,5vw,80px) 26px;
+  background:linear-gradient(165deg, var(--navy), #050f33);
+  border-top:3px solid var(--gold);
+}
+/* footer spans full screen width — content not capped at 1240 */
+.footer > .container{max-width:none;width:100%}
+.footer-grid{
+  display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:clamp(30px,4vw,70px);
+  margin-bottom:50px;
+}
+@media (max-width:880px){ .footer-grid{grid-template-columns:1fr 1fr;gap:30px} }
+@media (max-width:560px){ .footer-grid{grid-template-columns:1fr} }
+.footer-brand .nav-logo{margin-bottom:18px;color:#fff}
+.footer-brand .nav-logo img{filter:brightness(0) invert(1);opacity:.95}
+.footer-brand p{color:rgba(247,244,239,.55);font-size:.92rem;line-height:1.7;max-width:320px}
+.footer-col h5{
+  font-family:'Fraunces',serif;
+  font-weight:600;font-size:.98rem;margin-bottom:18px;
+  color:#f7f4ef;letter-spacing:.3px;
+}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{
+  color:rgba(247,244,239,.55);font-size:.88rem;
+  transition:color .25s,padding-left .25s;
+  display:inline-block;
+}
+.footer-col a:hover{color:var(--gold-soft);padding-left:6px}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.06);
+  padding-top:24px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:14px;
+}
+.footer-bottom p{color:rgba(247,244,239,.45);font-size:.85rem}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal{
+  opacity:0;transform:translateY(40px);
+  transition:opacity .45s cubic-bezier(.2,.7,.2,1), transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-3d{
+  opacity:0;transform:translateY(40px) rotateX(15deg);
+  transform-origin:bottom center;
+  transition:opacity .5s cubic-bezier(.2,.7,.2,1), transform .5s cubic-bezier(.2,.7,.2,1);
+}
+.reveal-3d.in{opacity:1;transform:translateY(0) rotateX(0)}
+
+/* Mobile menu */
+.mobile-menu{
+  position:fixed;top:0;right:0;
+  width:min(360px, 100vw);height:100vh;
+  background:rgba(7,22,69,.97);
+  backdrop-filter:blur(20px);
+  border-left:1px solid rgba(255,255,255,.08);
+  z-index:300;
+  padding:90px 28px 30px;
+  transform:translateX(100%);
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{
+  display:block;padding:14px 0;
+  font-size:.98rem;font-weight:500;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  color:rgba(247,244,239,.8);
+}
+.mobile-menu .sub{padding-left:18px;font-size:.88rem;color:rgba(247,244,239,.55)}
+.mobile-close{
+  position:absolute;top:24px;right:24px;
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:1.2rem;color:rgba(247,244,239,.7);
+}
+
+
+/* ---------- YouTube story ---------- */
+.video-sec{background:var(--paper)}
+.video-sec .sec-head{text-align:center;max-width:720px;margin:0 auto}
+.video-sec .sec-head p{color:var(--ink-soft);font-size:1.05rem;line-height:1.7;margin-top:6px}
+
+/* ---------- 3D moving gallery ---------- */
+.g3d-sec{padding-bottom:90px;overflow:hidden}
+.g3d-head{text-align:center;max-width:720px;margin:0 auto 46px}
+.g3d-head p{color:var(--ink-soft);font-size:1.05rem;line-height:1.7;margin-top:6px}
+.g3d{position:relative;perspective:1600px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.g3d-track{display:flex;gap:4px;width:max-content;padding:40px 26px;
+  transform-style:preserve-3d;animation:g3dscroll 46s linear infinite}
+.g3d:hover .g3d-track{animation-play-state:paused}
+.g3d-item{position:relative;flex:0 0 auto;width:360px;aspect-ratio:4/3;
+  border-radius:14px;overflow:hidden;background:var(--card);
+  border:1px solid var(--line);box-shadow:var(--shadow);
+  transform:rotateY(-22deg) scale(.94);transform-origin:center;
+  transition:transform .5s var(--ease,cubic-bezier(.2,.7,.2,1)), box-shadow .5s;cursor:none}
+.g3d-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease}
+.g3d-item figcaption{position:absolute;left:0;right:0;bottom:0;
+  padding:26px 16px 14px;color:#fff;font-family:'Fraunces',serif;font-size:1.05rem;
+  background:linear-gradient(0deg,rgba(7,22,69,.82),transparent);
+  transform:translateY(8px);opacity:0;transition:.5s}
+.g3d-item:hover{transform:rotateY(0) scale(1.04);box-shadow:var(--shadow-lg);border-color:rgba(233,200,7,.5)}
+.g3d-item:hover img{transform:scale(1.08)}
+.g3d-item:hover figcaption{transform:none;opacity:1}
+@keyframes g3dscroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 13px))}}
+@media (max-width:900px){ .g3d-item{width:260px;cursor:pointer} }
+@media (prefers-reduced-motion:reduce){ .g3d-track{animation:none} .g3d-item{transform:none} }
+
+
+/* ---------- Footer illustration band ---------- */
+.footer-illo{margin-top:44px;line-height:0;pointer-events:none;width:100%}
+.footer-illo img{width:100%;height:auto;display:block;max-width:none;
+  filter:invert(1) brightness(1.6) contrast(1.05);mix-blend-mode:screen;opacity:.9}
+@media (max-width:900px){ .footer-illo img{min-height:70px;object-fit:cover;object-position:center} }
+
+
+/* ---------- About reach-map variant ---------- */
+.about-visual.reach{transform:none;box-shadow:var(--shadow);border-radius:16px;background:#fdf7e6;padding:14px;border:1px solid var(--line)}
+.about-visual.reach:hover{transform:none}
+.about-visual.reach img{aspect-ratio:auto;object-fit:contain;width:auto;max-width:100%;max-height:560px;margin:0 auto}
+
+/* ---------- About: glass text card + hovering image (no tile) ---------- */
+.about{position:relative;overflow:hidden}
+/* soft colour wash so the frosted glass actually reads on the page */
+.about::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(45% 60% at 82% 40%, rgba(233,200,7,.16), transparent 65%),
+    radial-gradient(50% 60% at 12% 80%, rgba(111,145,132,.14), transparent 65%)}
+.about .container{position:relative;z-index:1}
+.about-left.glass{
+  background:rgba(255,255,255,.72);will-change:backdrop-filter;
+  -webkit-backdrop-filter:blur(8px) saturate(1.15);backdrop-filter:blur(8px) saturate(1.15);
+  border:1px solid rgba(255,255,255,.7);border-radius:24px;
+  padding:clamp(26px,3.5vw,46px);
+  box-shadow:0 26px 60px rgba(7,22,69,.12), inset 0 1px 0 rgba(255,255,255,.8)}
+/* hovering image with no card/tile underneath */
+.about-visual.float-img{background:none;border:none;box-shadow:none;padding:0;transform:none;
+  overflow:visible;border-radius:0;display:flex;align-items:center;justify-content:center}
+.about-visual.float-img:hover{transform:none}
+.about-visual.float-img img{aspect-ratio:auto;object-fit:contain;width:clamp(240px,32vw,440px);height:auto;margin:0 auto;
+  filter:drop-shadow(0 26px 34px rgba(7,22,69,.22));animation:floatUpDown 4.6s ease-in-out infinite;will-change:transform}
+@keyframes floatUpDown{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+@media (prefers-reduced-motion:reduce){ .about-visual.float-img img{animation:none} }
+
+/* ---------- Empowering section (image left, text right) ---------- */
+.empower-sec{padding:68px 24px 30px;position:relative;overflow:hidden}
+.empower-sec::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(45% 60% at 18% 45%, rgba(233,200,7,.16), transparent 65%),
+    radial-gradient(50% 60% at 88% 75%, rgba(111,145,132,.14), transparent 65%)}
+.empower-sec .empower-grid{position:relative;z-index:1}
+.empower-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(30px,5vw,70px);align-items:center}
+.empower-img{text-align:center}
+.empower-img img{width:clamp(240px,30vw,420px);height:auto;margin:0 auto;
+  filter:drop-shadow(0 26px 34px rgba(7,22,69,.22));animation:floatUpDown 3.1s ease-in-out infinite;will-change:transform}
+.empower-text{background:rgba(255,255,255,.72);will-change:backdrop-filter;
+  -webkit-backdrop-filter:blur(8px) saturate(1.15);backdrop-filter:blur(8px) saturate(1.15);
+  border:1px solid rgba(255,255,255,.7);border-radius:24px;
+  padding:clamp(26px,3.5vw,46px);
+  box-shadow:0 26px 60px rgba(7,22,69,.12), inset 0 1px 0 rgba(255,255,255,.8)}
+.empower-text h2{font-family:'Fraunces',serif;font-weight:600;color:var(--ink);
+  font-size:clamp(2rem,4vw,3.2rem);line-height:1.08;letter-spacing:-.5px;margin-bottom:20px}
+.empower-text p{color:var(--ink-soft);font-size:1.05rem;line-height:1.75;margin-bottom:18px;max-width:52ch}
+@media (max-width:900px){ .empower-grid{grid-template-columns:1fr;gap:30px} .empower-img{order:-1} }
+@media (prefers-reduced-motion:reduce){ .empower-img img{animation:none} }
+
+/* ---------- Video section (below Empowering) ---------- */
+.video-sec{padding:15px 24px 68px;position:relative;overflow:hidden}
+.video-sec::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(45% 60% at 15% 30%, rgba(233,200,7,.16), transparent 65%),
+    radial-gradient(50% 60% at 90% 80%, rgba(111,145,132,.14), transparent 65%)}
+.video-sec .container{position:relative;z-index:1}
+.video-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px)}
+@media (max-width:900px){ .video-grid{grid-template-columns:1fr} }
+.video-card{background:rgba(255,255,255,.72);will-change:backdrop-filter;
+  -webkit-backdrop-filter:blur(8px) saturate(1.15);backdrop-filter:blur(8px) saturate(1.15);
+  border:1px solid rgba(255,255,255,.7);border-radius:24px;
+  padding:clamp(14px,2vw,22px);
+  box-shadow:0 26px 60px rgba(7,22,69,.12), inset 0 1px 0 rgba(255,255,255,.8)}
+.video-embed{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;
+  cursor:pointer;box-shadow:var(--shadow-lg)}
+.video-embed img{width:100%;height:100%;object-fit:cover;display:block}
+.video-embed iframe{width:100%;height:100%;position:absolute;inset:0;border:0}
+.video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:80px;height:80px;border-radius:50%;border:none;cursor:pointer;
+  background:rgba(233,32,29,.92);color:#fff;font-size:1.6rem;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 14px 34px rgba(0,0,0,.35);transition:transform .25s ease}
+.video-embed:hover .video-play{transform:translate(-50%,-50%) scale(1.1)}
+
+/* ---------- Enabling-change 3-image 3D gallery (non-overlapping) ---------- */
+.about-visual.gallery{background:none;border:none;box-shadow:none;padding:0;transform:none;overflow:visible;border-radius:0}
+.about-visual.gallery:hover{transform:none}
+.about-gallery{position:relative;perspective:1500px;min-height:clamp(240px,24vw,315px);transform-style:preserve-3d}
+.about-gallery figure{position:absolute;width:44%;margin:0;transform-style:preserve-3d;transition:z-index 0s}
+.about-gallery figure:nth-child(1){top:0;right:0;z-index:3;animation:bob3d 6.5s ease-in-out infinite}
+.about-gallery figure:nth-child(2){top:28%;left:2%;z-index:2;animation:bob3d 7.8s ease-in-out infinite .9s}
+.about-gallery figure:nth-child(3){top:56%;right:6%;z-index:1;animation:bob3d 9s ease-in-out infinite 1.8s}
+.about-gallery figure:hover{z-index:6}
+.about-gallery img{width:100%;height:auto;aspect-ratio:auto;object-fit:contain;display:block;filter:drop-shadow(0 18px 24px rgba(7,22,69,.20))}
+@media (max-width:900px){
+  .about-gallery{min-height:0;display:flex;flex-direction:column;gap:18px;perspective:none}
+  .about-gallery figure{position:relative;width:100%;top:auto;left:auto;right:auto;animation:none}
+}
+@media (prefers-reduced-motion:reduce){ .about-gallery figure{animation:none} }
+
+/* ---------- Scrolling stat slides ---------- */
+.statband{overflow:hidden;margin:8px 0 50px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.statband-track{display:flex;gap:22px;width:max-content;padding:6px 22px;animation:statscroll 38s linear infinite}
+.statband:hover .statband-track{animation-play-state:paused}
+.statslide{flex:0 0 auto;width:min(840px,88vw);aspect-ratio:2000/810;border-radius:14px;overflow:hidden;
+  box-shadow:var(--shadow);border:1px solid var(--line);background:#fff;transition:transform .5s var(--ease,cubic-bezier(.2,.7,.2,1)),box-shadow .5s}
+.statslide img{width:100%;height:100%;object-fit:cover;display:block}
+.statslide:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+@keyframes statscroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 11px))}}
+@media(prefers-reduced-motion:reduce){.statband-track{animation:none}}
+
+
+/* ---------- Floating 'model' illustrations (hover in air) ---------- */
+.model-float{padding:57px 24px 18px;text-align:center}
+.model-float .cap{font-family:'Fraunces',serif;color:var(--ink);font-size:clamp(1.4rem,2.6vw,2rem);margin-bottom:8px}
+.model-float .sub{color:var(--ink-soft);margin-bottom:40px}
+.mfloat-row{display:flex;justify-content:center;align-items:flex-end;gap:clamp(18px,6vw,88px);flex-wrap:wrap}
+.mfloat{width:clamp(96px,12vw,150px);height:auto;
+  filter:drop-shadow(0 20px 26px rgba(7,22,69,.20));animation:hoverair 5.2s ease-in-out infinite;cursor:none}
+.mfloat.f2{animation-delay:.7s}.mfloat.f3{animation-delay:1.4s}.mfloat.f4{animation-delay:2.1s}
+@keyframes hoverair{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-18px) rotate(1.2deg)}}
+/* reach graphic floating in impact section */
+.impact{position:relative}
+.reach-float{position:absolute;top:8px;right:2%;width:clamp(90px,10vw,150px);height:auto;opacity:.9;
+  filter:drop-shadow(0 16px 24px rgba(7,22,69,.16));animation:hoverair 6.5s ease-in-out infinite;pointer-events:none;z-index:1}
+@media (max-width:900px){ .reach-float{display:none} }
+@media(prefers-reduced-motion:reduce){.mfloat,.reach-float{animation:none}}
+
+
+@keyframes bob3d{
+  0%,100%{transform:translateY(0)   rotateX(7deg)  rotateY(-13deg)}
+  50%    {transform:translateY(-24px) rotateX(2deg) rotateY(-5deg)}
+}
+
+/* ---------- Accessibility: honour reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition-duration:.01ms !important}
+  .bg-mesh,.orb{animation:none !important}
+  .reveal,.reveal-3d{opacity:1 !important;transform:none !important}
+  .hero-h1 .ch{opacity:1 !important;transform:none !important}
+  .hero-eyebrow,.hero-sub,.hero-cta,.scroll-cue{opacity:1 !important;transform:none !important}
+  .card:hover .card-inner{transform:none}
+}
+
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<!-- Background -->
+<div class="bg-mesh"></div>
+<div class="bg-noise"></div>
+<div class="orbs">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="orb o4"></div>
+</div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <a href="#top" class="nav-logo">
+    <img src="images/logo.png" alt="Kalike" onerror="this.style.display='none'">
+  </a>
+  <ul class="nav-menu">
+    <li><a href="https://kalike.org/who-we-are/">WHO WE ARE</a></li>
+    <li><a href="https://kalike.org/how-we-work/">HOW WE WORK</a></li>
+    <li class="has-sub">
+      <a href="#what">WHAT WE DO</a>
+      <ul class="submenu">
+        <li><a href="https://kalike.org/ecd/">Early Childhood Education</a></li>
+        <li><a href="https://kalike.org/education/">Education</a></li>
+        <li><a href="https://kalike.org/livelihood/">Livelihood</a></li>
+        <li><a href="https://kalike.org/wash/">WASH</a></li>
+        <li><a href="https://kalike.org/skill/">Skill development</a></li>
+        <li><a href="https://kalike.org/elder-care/">Elderly Care</a></li>
+        <li><a href="https://kalike.org/crs/">CRS – Radio station</a></li>
+        <li><a href="https://kalike.org/disaster-relief/">Disaster Relief</a></li>
+      </ul>
+    </li>
+    <li class="has-sub">
+      <a href="#">RESOURCES</a>
+      <ul class="submenu">
+        <li><a href="https://kalike.org/annual-reports/">Annual Reports</a></li>
+        <li><a href="https://kalike.org/blogs/">Blog Posts</a></li>
+        <li><a href="https://kalike.org/research-publications/">Research Publications</a></li>
+        <li><a href="https://kalike.org/program-reports/">Impact Reports &amp; Program Reports</a></li>
+        <li><a href="https://kalike.org/kalike-resource-materials/">Kalike Resource Materials</a></li>
+      </ul>
+    </li>
+    <li><a href="https://kalike.org/about/">ABOUT US</a></li>
+    <li><a href="https://kalike.org/blogs/">LATEST UPDATES💫</a></li>
+  </ul>
+  <a href="https://kalike.org/join-us/" class="nav-cta">
+    JOIN OUR CAUSE
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+  <div class="nav-burger" id="burger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-close" id="mobileClose">×</div>
+  <a href="https://kalike.org/who-we-are/">WHO WE ARE</a>
+  <a href="https://kalike.org/how-we-work/">HOW WE WORK</a>
+  <a href="#what">WHAT WE DO</a>
+  <a href="https://kalike.org/ecd/" class="sub">Early Childhood Education</a>
+  <a href="https://kalike.org/education/" class="sub">Education</a>
+  <a href="https://kalike.org/livelihood/" class="sub">Livelihood</a>
+  <a href="https://kalike.org/wash/" class="sub">WASH</a>
+  <a href="https://kalike.org/skill/" class="sub">Skill development</a>
+  <a href="https://kalike.org/elder-care/" class="sub">Elderly Care</a>
+  <a href="https://kalike.org/crs/" class="sub">CRS – Radio station</a>
+  <a href="https://kalike.org/disaster-relief/" class="sub">Disaster Relief</a>
+  <a href="#">RESOURCES</a>
+  <a href="https://kalike.org/annual-reports/" class="sub">Annual Reports</a>
+  <a href="https://kalike.org/blogs/" class="sub">Blog Posts</a>
+  <a href="https://kalike.org/research-publications/" class="sub">Research Publications</a>
+  <a href="https://kalike.org/program-reports/" class="sub">Impact Reports &amp; Program Reports</a>
+  <a href="https://kalike.org/kalike-resource-materials/" class="sub">Kalike Resource Materials</a>
+  <a href="https://kalike.org/about/">ABOUT US</a>
+  <a href="https://kalike.org/blogs/">LATEST UPDATES💫</a>
+  <a href="https://kalike.org/join-us/" style="margin-top:18px;background:var(--gold);color:var(--navy);padding:14px;border-radius:10px;text-align:center;font-weight:600;">JOIN OUR CAUSE</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero-bg" id="heroBg">
+    <img src="images/hero-cover.jpg" alt="A Kalike family sharing a meal at home" />
+  </div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-eyebrow"><span class="pip"></span> Empowering people. Improving lives.</span>
+      <h1 class="hero-h1" id="heroH1">
+        <span class="line1"></span>
+        <span class="line2"></span>
+      </h1>
+      <p class="hero-sub">
+        Our passion is fiercely directed at overall human development through interventions that touch all aspects of life.
+      </p>
+      <div class="hero-cta">
+        <a href="https://kalike.org/causes/" class="btn btn-primary">
+          LEARN ABOUT OUR MODEL
+          <span class="arrow">→</span>
+        </a>
+        <a href="https://kalike.org/join-us/" class="btn btn-ghost hero-ghost">
+          JOIN OUR CAUSE
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <div class="mouse"></div>
+    <span>Scroll</span>
+  </div>
+</header>
+
+<!-- ============ EMPOWERING ============ -->
+<section class="empower-sec">
+  <div class="container empower-grid">
+    <div class="empower-img reveal">
+      <img src="images/model-empower.webp" alt="Empowering people, improving lives">
+    </div>
+    <div class="empower-text reveal">
+      <h2>Empowering people. <span class="grad">Improving lives.</span></h2>
+      <p class="lead">We work to create sustainable livelihoods.</p>
+      <p>Our model involves using plug-and-play models to enhance the quality of life for underdeveloped communities, with interventions including early childhood development, education, livelihood, skill development and water &amp; sanitation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT (Enabling change) ============ -->
+<section class="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left glass reveal-3d">
+        <h2>Enabling change <span class="grad">that matters.</span></h2>
+        <p class="lead">We look to create meaningful impact.</p>
+        <p>Together, we work to build sustainable communities that have better health, education, livelihood, and ultimately, better opportunities.</p>
+        <p>Through direct field engagement, we look towards creating long-term and large-scale impact on the quality of life, creating a holistic approach to better living.</p>
+      </div>
+      <div class="about-visual gallery reveal">
+        <div class="about-gallery">
+          <figure><img src="images/model-book.png" alt="Educate"></figure>
+          <figure><img src="images/model-seller.png" alt="Sustain"></figure>
+          <figure><img src="images/model-tailor.png" alt="Skill"></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EMPOWERING (repeat, below Enabling change) ============ -->
+<section class="empower-sec">
+  <div class="container empower-grid">
+    <div class="empower-img reveal">
+      <img src="images/reach.png" alt="Community gathered under a tree">
+    </div>
+    <div class="empower-text reveal">
+      <h2>Our impact <span class="grad">reaches out to everyone.</span></h2>
+      <p>Through direct field engagement, we look towards creating long-term and large-scale impact on the quality of life, creating a holistic approach to better living.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VIDEO ============ -->
+<section class="video-sec">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">Watch</span>
+      <h2 class="sec-title">Our story <span class="grad">in motion</span></h2>
+      <p>See how direct field engagement creates long-term, large-scale impact on the quality of life.</p>
+    </div>
+  </div>
+  <div class="container video-grid">
+    <div class="video-card">
+      <div class="video-embed" id="kalikeVideo1" onclick="playKalikeVideo('kalikeVideo1','oB-VPPDQp5I')">
+        <img src="images/Screenshot 2026-09-04 152145.png" alt="Kalike: Empowering people, Improving lives — watch on YouTube">
+        <button class="video-play" aria-label="Play video">▶</button>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="video-embed" id="kalikeVideo2" onclick="playKalikeVideo('kalikeVideo2','cOaSCDpxZUo')">
+        <img src="images/Screenshot 2026-09-04 163613.png" alt="Alternate Wetting and Drying (AWD) — watch on YouTube">
+        <button class="video-play" aria-label="Play video">▶</button>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+function playKalikeVideo(id, videoId){
+  document.getElementById(id).innerHTML =
+    '<iframe src="https://www.youtube.com/embed/'+videoId+'?autoplay=1" title="Kalike video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+}
+</script>
+
+<!-- ============ IMPACT ============ -->
+<section class="impact">
+  <img class="reach-float" src="images/reach.png" alt="" aria-hidden="true">
+  <div class="container">
+    <div class="statband reveal" aria-label="Impact highlights">
+      <div class="statband-track">
+      <div class="statslide"><img loading="lazy" src="images/stat-1-early-childhood.jpg" alt="Early Childhood Development — 25,664+ Anganwadi workers trained by Kalike"></div>
+      <div class="statslide"><img loading="lazy" src="images/stat-2-education.jpg" alt="Education — 1,42,000+ students improved in learning levels"></div>
+      <div class="statslide"><img loading="lazy" src="images/stat-3-wash.jpg" alt="Water, Sanitation & Hygiene — 156+ villages with hygiene programs in schools"></div>
+      <div class="statslide"><img loading="lazy" src="images/stat-4.png" alt="Kalike impact highlight"></div>
+      <div class="statslide"><img loading="lazy" src="images/stat-5.png" alt="Kalike impact highlight"></div>
+      <div class="statslide"><img loading="lazy" src="images/stat-6.png" alt="Kalike impact highlight"></div>
+      <div class="statslide"><img loading="lazy" src="images/stat-1-early-childhood.jpg" alt="Early Childhood Development — 25,664+ Anganwadi workers trained by Kalike"></div>
+      <div class="statslide"><img loading="lazy" src="images/stat-2-education.jpg" alt="Education — 1,42,000+ students improved in learning levels"></div>
+      <div class="statslide"><img loading="lazy" src="images/stat-3-wash.jpg" alt="Water, Sanitation & Hygiene — 156+ villages with hygiene programs in schools"></div>
+      <div class="statslide"><img loading="lazy" src="images/stat-4.png" alt="Kalike impact highlight"></div>
+      <div class="statslide"><img loading="lazy" src="images/stat-5.png" alt="Kalike impact highlight"></div>
+      <div class="statslide"><img loading="lazy" src="images/stat-6.png" alt="Kalike impact highlight"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ INTERVENTIONS ============ -->
+<section>
+  <div class="container">
+    <div class="interventions-head reveal">
+      <div class="left">
+        <span class="sec-eyebrow">About our interventions</span>
+        <h2 class="sec-title">What we do</h2>
+      </div>
+      <div class="right">Hover any card to flip &amp; explore →</div>
+    </div>
+
+    <div class="cards-grid">
+      <!-- Card 1: Early Childhood Education -->
+      <article class="card reveal-3d">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-img"><img src="images/program-1-early-childhood.png" alt="" /></div>
+            <div class="card-content">
+              <span class="card-tag">ECD</span>
+              <h3>Early Childhood Education</h3>
+            </div>
+            <div class="flip-hint">↻</div>
+          </div>
+          <div class="card-face card-back">
+            <div>
+              <h3>Early Childhood Education</h3>
+              <p>Nurturing the physiological &amp; psychological growth of children between the ages of 3 &amp; 6.</p>
+            </div>
+            <a href="https://kalike.org/ecd/" class="card-link">Explore <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: Education -->
+      <article class="card reveal-3d">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-img"><img src="images/program-2-education.png" alt="" /></div>
+            <div class="card-content">
+              <span class="card-tag">Edu</span>
+              <h3>Education</h3>
+            </div>
+            <div class="flip-hint">↻</div>
+          </div>
+          <div class="card-face card-back">
+            <div>
+              <h3>Education</h3>
+              <p>Designed to specifically address issues at each stage of a child’s educational level.</p>
+            </div>
+            <a href="https://kalike.org/education/" class="card-link">Explore <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: Livelihood -->
+      <article class="card reveal-3d">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-img"><img src="images/program-3-livelihood.png" alt="" /></div>
+            <div class="card-content">
+              <span class="card-tag">Livelihood</span>
+              <h3>Livelihood</h3>
+            </div>
+            <div class="flip-hint">↻</div>
+          </div>
+          <div class="card-face card-back">
+            <div>
+              <h3>Livelihood</h3>
+              <p>Disseminating the best practices in agricultural production with technology, to increase yield.</p>
+            </div>
+            <a href="https://kalike.org/livelihood/" class="card-link">Explore <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4: WASH -->
+      <article class="card reveal-3d">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-img"><img src="images/program-6-wash.png" alt="WASH" /></div>
+            <div class="card-content">
+              <span class="card-tag">WASH</span>
+              <h3>WASH</h3>
+            </div>
+            <div class="flip-hint">↻</div>
+          </div>
+          <div class="card-face card-back">
+            <div>
+              <h3>WASH</h3>
+              <p>A collaborative effort to educate and empower the community about better sanitation.</p>
+            </div>
+            <a href="https://kalike.org/wash/" class="card-link">Explore <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5: Skill development -->
+      <article class="card reveal-3d">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-img"><img src="images/program-4-skill-development.png" alt="Skill development" /></div>
+            <div class="card-content">
+              <span class="card-tag">Skill</span>
+              <h3>Skill development</h3>
+            </div>
+            <div class="flip-hint">↻</div>
+          </div>
+          <div class="card-face card-back">
+            <div>
+              <h3>Skill development</h3>
+              <p>An initiative to reduce unemployment and build confidence among youth, while raising household incomes.</p>
+            </div>
+            <a href="https://kalike.org/skill/" class="card-link">Explore <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6: CRS – Radio station -->
+      <article class="card reveal-3d">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-img"><img src="images/program-5-community-radio.jpg" alt="CRS – Community Radio station" /></div>
+            <div class="card-content">
+              <span class="card-tag">CRS</span>
+              <h3>CRS – Radio station</h3>
+            </div>
+            <div class="flip-hint">↻</div>
+          </div>
+          <div class="card-face card-back">
+            <div>
+              <h3>CRS – Radio station</h3>
+              <p>A community radio station established to serve the community, broadcasting at 90.4 MhZ.</p>
+            </div>
+            <a href="https://kalike.org/crs/" class="card-link">Explore <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 7: Lambani women -->
+      <article class="card reveal-3d">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-img"><img src="images/program-7-lambani-women.jpg" alt="Lambani women entrepreneurs" /></div>
+            <div class="card-content">
+              <span class="card-tag">Women</span>
+              <h3>Lambani women entrepreneurs</h3>
+            </div>
+            <div class="flip-hint">↻</div>
+          </div>
+          <div class="card-face card-back">
+            <div>
+              <h3>Lambani women entrepreneurs</h3>
+              <p>Group of determined Lambani women as entrepreneurs, leaders, and agents of change.</p>
+            </div>
+            <a href="https://kalike.org/causes/" class="card-link">Explore <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 8: Elderly Care -->
+      <article class="card reveal-3d">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-img"><img src="images/program-8-elderly-care.jpg" alt="Elderly Care" /></div>
+            <div class="card-content">
+              <span class="card-tag">Elderly</span>
+              <h3>Elderly Care</h3>
+            </div>
+            <div class="flip-hint">↻</div>
+          </div>
+          <div class="card-face card-back">
+            <div>
+              <h3>Elderly Care</h3>
+              <p>Addressing the basic health needs in rural areas through the National Program for Healthcare of Elderly.</p>
+            </div>
+            <a href="https://kalike.org/elder-care/" class="card-link">Explore <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 9: Girl Child -->
+      <article class="card reveal-3d">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-img"><img src="images/program-9-girl-child.jpg" alt="Empowering the Girl Child" /></div>
+            <div class="card-content">
+              <span class="card-tag">Girl Child</span>
+              <h3>Empowering the Girl Child</h3>
+            </div>
+            <div class="flip-hint">↻</div>
+          </div>
+          <div class="card-face card-back">
+            <div>
+              <h3>Empowering the Girl Child</h3>
+              <p>Empowering the Girl Child through Education, Life Skills, and Holistic Development.</p>
+            </div>
+            <a href="https://kalike.org/causes/" class="card-link">Explore <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ============ 3D MOVING GALLERY ============ -->
+<section class="g3d-sec">
+  <div class="container">
+    <div class="g3d-head reveal">
+      <span class="sec-eyebrow">In the field</span>
+      <h2 class="sec-title">Moments across our programmes</h2>
+      <p>A holistic approach to better living — from early childhood to elderly care.</p>
+    </div>
+  </div>
+  <div class="g3d">
+    <div class="g3d-track">
+      <figure class="g3d-item"><img loading="lazy" src="images/program-1-early-childhood.png" alt="Early Childhood"><figcaption>Early Childhood</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-2-education.png" alt="Education"><figcaption>Education</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-3-livelihood.png" alt="Livelihood"><figcaption>Livelihood</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-4-skill-development.png" alt="Skill Development"><figcaption>Skill Development</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-5-community-radio.jpg" alt="Community Radio &middot; 90.4"><figcaption>Community Radio &middot; 90.4</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-6-wash.png" alt="Water &amp; Sanitation"><figcaption>Water &amp; Sanitation</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-7-lambani-women.jpg" alt="Lambani Women"><figcaption>Lambani Women</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-8-elderly-care.jpg" alt="Elderly Care"><figcaption>Elderly Care</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-9-girl-child.jpg" alt="Girl Child"><figcaption>Girl Child</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-1-early-childhood.png" alt="Early Childhood"><figcaption>Early Childhood</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-2-education.png" alt="Education"><figcaption>Education</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-3-livelihood.png" alt="Livelihood"><figcaption>Livelihood</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-4-skill-development.png" alt="Skill Development"><figcaption>Skill Development</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-5-community-radio.jpg" alt="Community Radio &middot; 90.4"><figcaption>Community Radio &middot; 90.4</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-6-wash.png" alt="Water &amp; Sanitation"><figcaption>Water &amp; Sanitation</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-7-lambani-women.jpg" alt="Lambani Women"><figcaption>Lambani Women</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-8-elderly-care.jpg" alt="Elderly Care"><figcaption>Elderly Care</figcaption></figure>
+      <figure class="g3d-item"><img loading="lazy" src="images/program-9-girl-child.jpg" alt="Girl Child"><figcaption>Girl Child</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PILLARS ============ -->
+<section class="pillars-banner">
+  <div class="pillars-bg">
+    <img src="images/pillars.webp" alt="Pillars of strength" />
+  </div>
+  <div class="pillars-overlay reveal-3d">
+    <span class="sec-eyebrow">Pillars of strength</span>
+    <h2 class="sec-title">Built on partnerships &amp; Government systems</h2>
+    <p>Our field team works directly with the community to initiate sustainability alongside our partners and existing Government systems.</p>
+    <div class="pillars-badges">
+      <span class="pillars-badge">Field team</span>
+      <span class="pillars-badge">Community</span>
+      <span class="pillars-badge">Partners</span>
+      <span class="pillars-badge">Government systems</span>
+    </div>
+    <div style="margin-top:28px">
+      <a href="https://kalike.org/how-we-work/" class="btn btn-primary">
+        LEARN ABOUT OUR MODEL
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="nav-logo">
+          <img src="images/logo.png" alt="Kalike" onerror="this.style.display='none'">
+          <span>Kalike</span>
+        </a>
+        <p>Empowering people. Improving lives. We work to create sustainable livelihoods.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Get to know us</h5>
+        <ul>
+          <li><a href="https://kalike.org/who-we-are/">Read our story</a></li>
+          <li><a href="https://kalike.org/how-we-work/">Learn our model</a></li>
+          <li><a href="https://kalike.org/about/">Meet our people</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>About our interventions</h5>
+        <ul>
+          <li><a href="https://kalike.org/ecd/">Early childhood development</a></li>
+          <li><a href="https://kalike.org/education/">Education</a></li>
+          <li><a href="https://kalike.org/livelihood/">Livelihood</a></li>
+          <li><a href="https://kalike.org/wash/">WASH</a></li>
+          <li><a href="https://kalike.org/skill/">Skill development</a></li>
+          <li><a href="https://kalike.org/elder-care/">Elderly Care</a></li>
+          <li><a href="https://kalike.org/crs/">Community Radio Station</a></li>
+          <li><a href="https://kalike.org/disaster-relief/">Disaster Relief</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Connect with us</h5>
+        <ul>
+          <li><a href="https://kalike.org/contact-one/">Contact us</a></li>
+          <li><a href="https://kalike.org/join-us/">Work with us</a></li>
+          <li><a href="https://kalike.org/join-us/">Donate</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Kalike</p>
+      <p>Creating sustainability across generations</p>
+    </div>
+  </div>
+  <div class="footer-illo" aria-hidden="true">
+    <img loading="lazy" src="images/footer-illustration.jpg" alt="">
+  </div>
+</footer>
+
+<script>
+/* ================== Custom cursor ================== */
+(function(){
+  if (window.matchMedia('(max-width: 900px)').matches) return;
+  const dot = document.querySelector('.cursor-dot');
+  const ring = document.querySelector('.cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  window.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    dot.style.left=mx+'px';dot.style.top=my+'px';
+  });
+  function loop(){
+    rx += (mx-rx)*0.18; ry += (my-ry)*0.18;
+    ring.style.left=rx+'px';ring.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  }
+  loop();
+  document.querySelectorAll('a, .card, .btn, .know-card, .impact-card, .nav-burger').forEach(el=>{
+    el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
+    el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
+  });
+})();
+
+/* ================== Nav scrolled state ================== */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  if (window.scrollY > 30) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+/* ================== Mobile menu ================== */
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+burger.addEventListener('click',()=>mobileMenu.classList.add('open'));
+mobileClose.addEventListener('click',()=>mobileMenu.classList.remove('open'));
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobileMenu.classList.remove('open')));
+
+/* ================== Hero 3D text reveal ================== */
+(function(){
+  const h1 = document.getElementById('heroH1');
+  const line1 = h1.querySelector('.line1');
+  const line2 = h1.querySelector('.line2');
+  const t1 = "Creating sustainability";
+  const t2 = "across generations";
+  let delay = 0;
+  function splitChars(target, text){
+    const words = text.split(' ');
+    target.innerHTML = '';
+    words.forEach((w, wi)=>{
+      const wEl = document.createElement('span');
+      wEl.className = 'word';
+      [...w].forEach(c=>{
+        const ch = document.createElement('span');
+        ch.className = 'ch';
+        ch.textContent = c;
+        ch.style.animationDelay = (delay*0.028)+'s';
+        delay++;
+        wEl.appendChild(ch);
+      });
+      target.appendChild(wEl);
+      if (wi < words.length-1) target.appendChild(document.createTextNode(' '));
+    });
+  }
+  splitChars(line1, t1);
+  splitChars(line2, t2);
+})();
+
+/* ================== Hero cover scroll parallax ================== */
+(function(){
+  const bg = document.getElementById('heroBg');
+  if (!bg) return;
+  const img = bg.firstElementChild;
+  window.addEventListener('scroll', ()=>{
+    const y = window.scrollY;
+    if (y < window.innerHeight) img.style.transform = `scale(1.08) translateY(${y*0.14}px)`;
+  }, {passive:true});
+})();
+
+/* ================== Scroll reveal ================== */
+(function(){
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach((entry, i)=>{
+      if (entry.isIntersecting){
+        // stagger children if grid
+        const parent = entry.target.parentElement;
+        if (parent && parent.classList.contains('cards-grid')){
+          const idx = [...parent.children].indexOf(entry.target);
+          entry.target.style.transitionDelay = (idx*0.04)+'s';
+        } else if (parent && parent.classList.contains('impact-slider')){
+          const idx = [...parent.children].indexOf(entry.target);
+          entry.target.style.transitionDelay = (idx*0.04)+'s';
+        } else if (parent && parent.classList.contains('know-grid')){
+          const idx = [...parent.children].indexOf(entry.target);
+          entry.target.style.transitionDelay = (idx*0.04)+'s';
+        }
+        entry.target.classList.add('in');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.01, rootMargin:'0px 0px 150px 0px'});
+
+  document.querySelectorAll('.reveal, .reveal-3d').forEach(el=>obs.observe(el));
+})();
+
+/* ================== Smooth scroll for #top ================== */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const href = a.getAttribute('href');
+    if (href.length > 1){
+      const t = document.querySelector(href);
+      if (t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+    }
+  });
+});
+
+/* ================== Magnetic buttons (subtle) ================== */
+(function(){
+  if (window.matchMedia('(max-width: 900px)').matches) return;
+  document.querySelectorAll('.btn, .nav-cta').forEach(btn=>{
+    btn.addEventListener('mousemove', e=>{
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width/2;
+      const y = e.clientY - r.top - r.height/2;
+      btn.style.transform = `translate(${x*0.18}px, ${y*0.28}px)`;
+    });
+    btn.addEventListener('mouseleave', ()=>{
+      btn.style.transform = '';
+    });
+  });
+})();
+
+/* ================== Card subtle 3D tilt on mouse ================== */
+(function(){
+  if (window.matchMedia('(max-width: 900px)').matches) return;
+  // Note: cards already flip on hover. We add a subtle parallax to impact-card & know-card.
+  document.querySelectorAll('.impact-card, .know-card').forEach(card=>{
+    card.addEventListener('mousemove', e=>{
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `translateY(-10px) rotateX(${-y*8}deg) rotateY(${x*8}deg)`;
+    });
+    card.addEventListener('mouseleave', ()=>{
+      card.style.transform = '';
+    });
+  });
+})();
+
+</script>
+</body>
+</html>
