@@ -643,6 +643,16 @@ p.lead{
   font-size:1.05rem;line-height:1.75;color:#fff;margin-bottom:24px;text-shadow:0 1px 10px rgba(0,0,0,.6);
 }
 .pillars-overlay .sec-eyebrow{background:rgba(7,22,69,.55);border-color:rgba(255,255,255,.35);color:#fff;backdrop-filter:blur(4px)}
+.pillars-title{
+  font-family:'Fraunces',serif;font-weight:700;
+  font-size:clamp(2.4rem, 6vw, 4.6rem);
+  line-height:1.05;letter-spacing:-1px;
+  margin-bottom:22px;
+  background-image:linear-gradient(90deg, var(--gold-soft), #fff 35%, var(--sage-soft) 65%, var(--gold));
+  background-clip:text;-webkit-background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+  text-shadow:0 2px 30px rgba(0,0,0,.35);
+}
 .pillars-overlay .btn-primary{background:var(--gold)}
 
 .pillars-badges{
@@ -1382,7 +1392,7 @@ function playKalikeVideo(id, videoId){
     <img loading="lazy" src="images/pillars.webp" alt="Pillars of strength" />
   </div>
   <div class="pillars-overlay reveal-3d">
-    <span class="sec-eyebrow">Pillars of strength</span>
+    <h2 class="pillars-title">Pillars of strength</h2>
     <p>Our field team works directly with the community to initiate sustainability alongside our partners and existing Government systems.</p>
     <div class="pillars-badges">
       <span class="pillars-badge">Field team</span>
